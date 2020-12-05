@@ -29,6 +29,8 @@ if PythonVersion < (3, 7):
     from . import py36 as real_lib
 elif PythonVersion.major == 3 and PythonVersion.minor == 7:
     from . import py37 as real_lib
+elif PythonVersion.major == 3 and PythonVersion.minor == 8:
+    from . import py37 as real_lib
 else:
     raise RuntimeError("Python version {} is not supported."
                        .format(PythonVersion))

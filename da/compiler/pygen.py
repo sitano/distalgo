@@ -255,7 +255,8 @@ def propagate_fields(node):
     """
     if hasattr(node, '_fields'):
         for f in node._fields:
-            propagate_attributes(getattr(node, f), node)
+            if hasattr(node, f):
+                propagate_attributes(getattr(node, f), node)
     return node
 
 class MaxLineAndColFinder(NodeVisitor):
