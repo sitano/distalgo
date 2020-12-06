@@ -548,18 +548,20 @@ class TcpTransport(SocketTransport):
                         conn = self._connect(target)
                     self._send_1(message, conn, target)
                     return
+                except AuthenticationException as e:
+                    raise e
                 except ConnectionRefusedError as e:
                     if (not retry_refused_connections) or retry > retries:
                         raise TransportException(
                             'connection refused by {}'.format(target)) from e
                 except (socket.error, socket.timeout) as e:
-                    self._log.debug("Sending to %s failed on %dth try: %r",
+                    self._log.error("Sending to %s failed on %dth try: %r",
                                     target, retry, e)
                     if conn is not None:
                         conn.close()
                         conn = None
                 except:
-                    self._log.debug("Sending to %s failed on %dth try: %r",
+                    self._log.error("Sending to %s failed on %dth try: %r",
                                     target, retry, sys.exc_info()[0])
 
                 if retry > retries:

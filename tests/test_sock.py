@@ -1,4 +1,3 @@
-import time
 import socket
 import unittest
 
@@ -51,6 +50,7 @@ class TestUdpTransport(unittest.TestCase):
                 self.queue.pop(timeout=0.01)
         sender.close()
         self.transport.close()
+
 
 class TestTcpTransport(unittest.TestCase):
     def setUp(self):
@@ -114,6 +114,7 @@ class TestTcpTransport(unittest.TestCase):
                 self.queue.pop(timeout=0.01)
         sender.close()
         self.transport.close()
+
 
 if __name__ == '__main__':
     unittest.main()
